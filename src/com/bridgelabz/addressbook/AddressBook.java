@@ -1,11 +1,11 @@
 package com.bridgelabz.addressbook;
 
 public class AddressBook {
-	Contact person;
+	Contact[] persons;
 
-	public AddressBook(Contact person) {
+	public AddressBook(Contact[] persons) {
 		super();
-		this.person = person;
+		this.persons = persons;
 	}
 
 }
