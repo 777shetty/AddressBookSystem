@@ -1,6 +1,8 @@
 package com.bridgelabz.addressbook;
 
 import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Scanner;
 
 public class AddressBookImpl implements AddressBookIF {
@@ -8,6 +10,8 @@ public class AddressBookImpl implements AddressBookIF {
 	AddressBook addressBook;
 	int index;
 	static final Scanner sc = AddressBookMain.sc;
+	static final HashMap<String, List<Contact>> contactNamesByCity = AddressBookMain.contactNamesByCity;
+	static final HashMap<String, List<Contact>> contactNamesByState = AddressBookMain.contactNamesByState;
 
 	public AddressBookImpl(String addressBookName) {
 
@@ -28,7 +32,6 @@ public class AddressBookImpl implements AddressBookIF {
 		String firstName = sc.nextLine();
 		System.out.println("Enter Last Name: ");
 		String lastName = sc.nextLine();
-		
 
 		if (addressBook.contactList.get(firstName + " " + lastName) != null) {
 			System.out.println("Duplicate entry! Contact already exists");
@@ -48,6 +51,16 @@ public class AddressBookImpl implements AddressBookIF {
 			String email = sc.nextLine();
 			addressBook.contactList.put(firstName + " " + lastName,
 					new Contact(firstName, lastName, address, city, state, zip, phoneNum, email));
+			if (contactNamesByCity.get(city) == null) {
+				contactNamesByCity.put(city, new LinkedList<Contact>());
+			}
+			contactNamesByCity.get(city).add(addressBook.contactList.get(firstName + " " + lastName));
+
+			if (contactNamesByState.get(state) == null) {
+				contactNamesByState.put(state, new LinkedList<Contact>());
+			}
+			contactNamesByState.get(state).add(addressBook.contactList.get(firstName + " " + lastName));
+
 			System.out
 					.println("Contact Details are added!\n" + addressBook.contactList.get(firstName + " " + lastName));
 		}
@@ -77,13 +90,13 @@ public class AddressBookImpl implements AddressBookIF {
 					addressBook.contactList.remove(name);
 
 					addressBook.contactList.put(newFirstName + " " + lastName,
-							new Contact(newFirstName, lastName, contact.getAddress(),
-									contact.getCity(), contact.getState(), contact.getZip(),
-									contact.getPhoneNumber(), contact.getEmail()));
+							new Contact(newFirstName, lastName, contact.getAddress(), contact.getCity(),
+									contact.getState(), contact.getZip(), contact.getPhoneNumber(),
+									contact.getEmail()));
 					System.out.println("Contact Details are added!\n"
 							+ addressBook.contactList.get(newFirstName + " " + lastName));
 				}
-				
+
 				break;
 			case 2:
 				System.out.println("Enter new Last Name: ");
@@ -93,9 +106,9 @@ public class AddressBookImpl implements AddressBookIF {
 				} else {
 					addressBook.contactList.remove(name);
 					addressBook.contactList.put(firstName + " " + newLastName,
-							new Contact(firstName, newLastName, contact.getAddress(),
-									contact.getCity(), contact.getState(), contact.getZip(),
-									contact.getPhoneNumber(), contact.getEmail()));
+							new Contact(firstName, newLastName, contact.getAddress(), contact.getCity(),
+									contact.getState(), contact.getZip(), contact.getPhoneNumber(),
+									contact.getEmail()));
 					System.out.println("Contact Details are added!\n"
 							+ addressBook.contactList.get(firstName + " " + newLastName));
 				}
@@ -108,12 +121,17 @@ public class AddressBookImpl implements AddressBookIF {
 			case 4:
 				System.out.println("Enter new City: ");
 				String newCity = sc.nextLine();
+				contactNamesByCity.get(contact.getCity()).remove(contact);
 				contact.setCity(newCity);
+				contactNamesByCity.get(contact.getCity()).add(contact);
 				break;
 			case 5:
 				System.out.println("Enter new State: ");
 				String newState = sc.nextLine();
+				contactNamesByState.get(contact.getState()).remove(contact);
 				contact.setState(newState);
+				contactNamesByState.get(contact.getState()).add(contact);
+
 				break;
 			case 6:
 				System.out.println("Enter new ZipCode: ");
@@ -147,7 +165,6 @@ public class AddressBookImpl implements AddressBookIF {
 		for (Contact contact : addressBook.contactList.values()) {
 			System.out.println(contact);
 		}
-
 	}
 
 	@Override
@@ -159,10 +176,13 @@ public class AddressBookImpl implements AddressBookIF {
 		String lastName = sc.nextLine();
 		Contact contact = addressBook.contactList.get(firstName + " " + lastName);
 		if (contact != null) {
-			System.out.println(contact+"\nDelete (y/n)");
+			System.out.println(contact + "\nDelete (y/n)");
 			if ((sc.nextLine()).equals("y")) {
 
 				addressBook.contactList.remove(firstName + " " + lastName);
+				contactNamesByCity.get(contact.getCity()).remove(contact);
+				contactNamesByState.get(contact.getState()).remove(contact);
+
 				System.out.println("Contact is deleted!");
 			}
 		} else {
@@ -173,7 +193,7 @@ public class AddressBookImpl implements AddressBookIF {
 	@Override
 	public boolean isAddressBookEmpty() {
 		if (addressBook.contactList.isEmpty()) {
-			
+
 			System.out.println("Address Book is empty!");
 			return true;
 		} else {
