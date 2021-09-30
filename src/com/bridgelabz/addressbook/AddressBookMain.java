@@ -72,26 +72,30 @@ public class AddressBookMain {
 					System.out.println("1. List all contacts in " + city + "\n2. Search for a person in " + city);
 					if (sc.nextInt() == 2) {
 						sc.nextLine();
-					System.out.println("Enter First Name: ");
-					String firstName = sc.nextLine();
-					System.out.println("Enter Last Name: ");
-					String lastName = sc.nextLine();
-					found = false;
-					for (Contact person : contactNamesByCity.get(city)) {
-						if (person.getFirstName().equals(firstName) && person.getLastName().equals(lastName)) {
-							found = true;
-							System.out.println("Found!\n" + person);
-						}
-					}
-					if (!found) {
-						System.out.println("No users exist with such name in " + city);
-					}
-					} else {
+						System.out.println("Enter First Name: ");
+						String firstName = sc.nextLine();
+						System.out.println("Enter Last Name: ");
+						String lastName = sc.nextLine();
+						found = false;
 						for (Contact person : contactNamesByCity.get(city)) {
-								System.out.println(person);
+							if (person.getFirstName().equals(firstName) && person.getLastName().equals(lastName)) {
+								found = true;
+								System.out.println("Found!\n" + person);
 							}
 						}
-					
+						if (!found) {
+							System.out.println("No users exist with such name in " + city);
+						}
+					} else {
+						int count = 0;
+						String output = "";
+						for (Contact person : contactNamesByCity.get(city)) {
+							output += person.toString();
+							count++;
+						}
+						System.out.println(count + " records found!\n" + output);
+					}
+
 				}
 				break;
 
@@ -120,10 +124,13 @@ public class AddressBookMain {
 							System.out.println("No users exist with such name in " + state);
 						}
 					} else {
+						int count = 0;
+						String output = "";
 						for (Contact person : contactNamesByState.get(state)) {
-							
-								System.out.println(person);
+							output += person.toString();
+							count++;
 						}
+						System.out.println(count + " records found!\n" + output);
 					}
 				}
 				break;
@@ -134,5 +141,7 @@ public class AddressBookMain {
 				System.out.println("Choose correct option from above mentioned option only!!");
 				break;
 			}
-		}while(choice!=6);sc.close();
-}}
+		} while (choice != 6);
+		sc.close();
+	}
+}
