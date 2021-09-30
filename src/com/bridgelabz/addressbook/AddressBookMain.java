@@ -1,5 +1,6 @@
 package com.bridgelabz.addressbook;
 
+
 import java.util.Scanner;
 
 public class AddressBookMain {
@@ -24,8 +25,7 @@ public class AddressBookMain {
 					
 					System.out.print("Enter the address book name: ");
 					String addressBookName = sc.nextLine();
-					System.out.print("Enter the maximum number of contacts required: ");
-					addressBook[++addressBookNumber] = new AddressBookImpl(addressBookName, sc.nextInt());
+					addressBook[++addressBookNumber] = new AddressBookImpl(addressBookName);
 				} 
 				else {
 					
@@ -70,5 +70,3 @@ public class AddressBookMain {
 		sc.close();
 	}
 }
-
-
