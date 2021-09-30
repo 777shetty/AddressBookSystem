@@ -65,10 +65,13 @@ public class AddressBookMain {
 			case 4:
 				System.out.println("Enter the city name: ");
 				String city = sc.nextLine();
-				
+
 				if (contactNamesByCity.get(city) == null) {
 					System.out.println("No records founds with city name: " + city);
 				} else {
+					System.out.println("1. List all contacts in " + city + "\n2. Search for a person in " + city);
+					if (sc.nextInt() == 2) {
+						sc.nextLine();
 					System.out.println("Enter First Name: ");
 					String firstName = sc.nextLine();
 					System.out.println("Enter Last Name: ");
@@ -83,29 +86,44 @@ public class AddressBookMain {
 					if (!found) {
 						System.out.println("No users exist with such name in " + city);
 					}
+					} else {
+						for (Contact person : contactNamesByCity.get(city)) {
+								System.out.println(person);
+							}
+						}
+					
 				}
 				break;
 
 			case 5:
 				System.out.println("Enter the state name: ");
 				String state = sc.nextLine();
-				
 				if (contactNamesByState.get(state) == null) {
 					System.out.println("No records founds with state name: " + state);
 				} else {
-					System.out.println("Enter First Name: ");
-					String firstName = sc.nextLine();
-					System.out.println("Enter Last Name: ");
-					String lastName = sc.nextLine();
-					found = false;
-					for (Contact person : contactNamesByState.get(state)) {
-						if (person.getFirstName().equals(firstName) && person.getLastName().equals(lastName)) {
-							found = true;
-							System.out.println("Found!\n" + person);
+					System.out.println("1. List all contacts in " + state + "\n2. Search for a person in " + state);
+					if (sc.nextInt() == 2) {
+						sc.nextLine();
+
+						System.out.println("Enter First Name: ");
+						String firstName = sc.nextLine();
+						System.out.println("Enter Last Name: ");
+						String lastName = sc.nextLine();
+						found = false;
+						for (Contact person : contactNamesByState.get(state)) {
+							if (person.getFirstName().equals(firstName) && person.getLastName().equals(lastName)) {
+								found = true;
+								System.out.println("Found!\n" + person);
+							}
 						}
-					}
-					if (!found) {
-						System.out.println("No users exist with such name in " + state);
+						if (!found) {
+							System.out.println("No users exist with such name in " + state);
+						}
+					} else {
+						for (Contact person : contactNamesByState.get(state)) {
+							
+								System.out.println(person);
+						}
 					}
 				}
 				break;
@@ -116,7 +134,5 @@ public class AddressBookMain {
 				System.out.println("Choose correct option from above mentioned option only!!");
 				break;
 			}
-		} while (choice != 6);
-		sc.close();
-	}
-}
+		}while(choice!=6);sc.close();
+}}
