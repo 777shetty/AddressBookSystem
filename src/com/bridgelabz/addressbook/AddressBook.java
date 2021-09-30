@@ -1,13 +1,16 @@
 package com.bridgelabz.addressbook;
 
+import java.util.HashMap;
+
 public class AddressBook {
 	String name;
-	Contact[] persons;
+	HashMap<String, Contact> contactList;
 
-	public AddressBook(String addressBookName, Contact[] persons) {
+	public AddressBook(String addressBookName, HashMap<String, Contact> contactList) {
 		super();
 		this.name = addressBookName;
-		this.persons = persons;
+		this.contactList = contactList;
+		
 	}
 
 }
