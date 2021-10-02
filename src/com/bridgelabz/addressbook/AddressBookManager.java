@@ -1,18 +1,15 @@
 package com.bridgelabz.addressbook;
-
 import java.util.HashMap;
 import java.util.List;
 import java.util.Scanner;
 
-public class AddressBookMain {
-
+public class AddressBookManager {
 	public static final int MAX_ADDRESS_BOOKS = 5;
 	public static final Scanner sc = new Scanner(System.in);
 	public static HashMap<String, List<Contact>> contactNamesByCity = new HashMap<String, List<Contact>>();
 	public static HashMap<String, List<Contact>> contactNamesByState = new HashMap<String, List<Contact>>();
 
-	public static void main(String[] args) {
-
+	public void start() {
 		System.out.println("Welcome to Address Book Program\n");
 		int choice, addressBookNumber = -1;
 		AddressBookIF addressBook[] = new AddressBookImpl[MAX_ADDRESS_BOOKS];
@@ -143,7 +140,5 @@ public class AddressBookMain {
 			}
 		} while (choice != 6);
 		sc.close();
-		AddressBookManager manager = new AddressBookManager();
-		manager.start();
 	}
 }

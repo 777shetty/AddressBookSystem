@@ -9,9 +9,10 @@ public class AddressBookImpl implements AddressBookIF {
 
 	AddressBook addressBook;
 	int index;
-	static final Scanner sc = AddressBookMain.sc;
-	static final HashMap<String, List<Contact>> contactNamesByCity = AddressBookMain.contactNamesByCity;
-	static final HashMap<String, List<Contact>> contactNamesByState = AddressBookMain.contactNamesByState;
+	static final Scanner sc = AddressBookManager.sc;
+	static final HashMap<String, List<Contact>> contactNamesByCity = AddressBookManager.contactNamesByCity;
+	static final HashMap<String, List<Contact>> contactNamesByState = AddressBookManager.contactNamesByState;
+
 
 	public AddressBookImpl(String addressBookName) {
 
