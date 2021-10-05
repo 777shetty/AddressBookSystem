@@ -166,7 +166,9 @@ public class AddressBookImpl implements AddressBookIF {
 		for (Contact contact : addressBook.contactList.values()) {
 			System.out.println(contact);
 		}
+		addressBook.contactList.values().stream().forEach(System.out::println);
 	}
+	
 
 	@Override
 	public void deleteContact() {
