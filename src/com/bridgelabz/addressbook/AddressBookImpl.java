@@ -1,5 +1,6 @@
 package com.bridgelabz.addressbook;
 
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
@@ -166,7 +167,11 @@ public class AddressBookImpl implements AddressBookIF {
 		for (Contact contact : addressBook.contactList.values()) {
 			System.out.println(contact);
 		}
+		addressBook.contactList.values().stream()
+		.sorted(Comparator.comparing(Contact::getFirstName))
+		.forEach(System.out::println);
 	}
+	
 
 	@Override
 	public void deleteContact() {
