@@ -2,27 +2,33 @@ package com.bridgelabz.addressbook;
 
 
 
+import java.util.HashMap;
+
 public interface AddressBookIF {
 
-	public String getAddressBookName();
-	
-	public void addContact();
+	String getAddressBookName();
 
-	public void editContact();
+	HashMap<String, Contact> getContactList();
+	void setContact(HashMap<String, String> map);
 
-	public void viewContact();
+	void addContact();
 
-	public void deleteContact();
+	void editContact();
 
-	public boolean isAddressBookEmpty();
+	void viewContact();
 
-	public void openAddressbook();
-	public void sortedByName();
+	void deleteContact();
 
-	public void sortedByCity();
+	boolean isAddressBookEmpty();
 
-	public void sortedByState();
+	void openAddressBook();
 
-	public void sortedByZip();
+	void sortedByName();
+
+	void sortedByCity();
+
+	void sortedByState();
+
+	void sortedByZip();
 
 }
