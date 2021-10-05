@@ -17,4 +17,12 @@ public interface AddressBookIF {
 	public boolean isAddressBookEmpty();
 
 	public void openAddressbook();
+	public void sortedByName();
+
+	public void sortedByCity();
+
+	public void sortedByState();
+
+	public void sortedByZip();
+
 }

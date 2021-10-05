@@ -164,13 +164,56 @@ public class AddressBookImpl implements AddressBookIF {
 	@Override
 	public void viewContact() {
 
-		for (Contact contact : addressBook.contactList.values()) {
-			System.out.println(contact);
+		System.out.println("\nSort by:\n 1)Name\t2)City\t3)State\t4)Zip");
+		switch (sc.nextInt()){
+			case 1:
+				sortedByName();
+				break;
+			case 2:
+				sortedByCity();
+				break;
+			case 3:
+				sortedByState();
+				break;
+			case 4:
+				sortedByZip();
+				break;
+			default: System.out.println("Please select correct option!");
 		}
+	}
+	@Override
+	public void sortedByName() {
+
+		System.out.println("Sorted By First Name:");
 		addressBook.contactList.values().stream()
 		.sorted(Comparator.comparing(Contact::getFirstName))
 		.forEach(System.out::println);
 	}
+	@Override
+	public void sortedByCity() {
+
+		System.out.println("Sorted By First Name:");
+		addressBook.contactList.values().stream()
+				.sorted(Comparator.comparing(Contact::getCity))
+				.forEach(System.out::println);
+	}
+	@Override
+	public void sortedByState() {
+
+		System.out.println("Sorted By First Name:");
+		addressBook.contactList.values().stream()
+				.sorted(Comparator.comparing(Contact::getState))
+				.forEach(System.out::println);
+	}
+	@Override
+	public void sortedByZip() {
+
+		System.out.println("Sorted By First Name:");
+		addressBook.contactList.values().stream()
+				.sorted(Comparator.comparing(Contact::getZip))
+				.forEach(System.out::println);
+	}
+	
 	
 
 	@Override
@@ -253,4 +296,5 @@ public class AddressBookImpl implements AddressBookIF {
 		} while (choice != 5);
 
 	}
+
 }
