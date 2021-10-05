@@ -1,5 +1,6 @@
 package com.bridgelabz.addressbook;
 
+
 import java.util.HashMap;
 import java.util.List;
 import java.util.Scanner;
@@ -143,7 +144,5 @@ public class AddressBookMain {
 			}
 		} while (choice != 6);
 		sc.close();
-		AddressBookManager manager = new AddressBookManager();
-		manager.start();
 	}
 }
